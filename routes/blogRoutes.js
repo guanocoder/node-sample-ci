@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const { clearCache } = require('../services/cache');
+const clearCache = require('../middlewares/clearCache');
 
 const Blog = mongoose.model('Blog');
 
@@ -20,7 +20,7 @@ module.exports = app => {
     res.send(blogs);
   });
 
-  app.post('/api/blogs', requireLogin, async (req, res) => {
+  app.post('/api/blogs', requireLogin, clearCache, async (req, res) => {
     const { title, content } = req.body;
 
     const blog = new Blog({
@@ -34,8 +34,6 @@ module.exports = app => {
       res.send(blog);
     } catch (err) {
       res.send(400, err);
-    } finally {
-      clearCache(req.user.id);
     }
   });
 };
