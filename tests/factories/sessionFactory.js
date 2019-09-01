@@ -2,10 +2,10 @@ const Keygrip = require('keygrip');
 const Buffer = require('safe-buffer').Buffer;
 const keys = require('../../config/keys.js');
 
-module.exports = (userId) => {
+module.exports = (user) => {
     const sessionObject = {
         passport: {
-            user: userId
+            user: user._id
         }
     };
     const sessionBase64String = Buffer.from(JSON.stringify(sessionObject)).toString('base64');
