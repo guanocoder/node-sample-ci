@@ -1,20 +1,16 @@
-const puppeteer = require('puppeteer');
 const sessionFactory = require('./factories/sessionFactory');
 const userFactory = require('./factories/userFactory');
+const Page = require('./helpers/customPage');
 
-let browser;
 let page;
 
 beforeEach(async () => {
-    browser = await puppeteer.launch({
-        headless: false
-    });
-    page = await browser.newPage();
+    page = await Page.build();
     await page.goto('localhost:3000');
 });
 
-afterEach(() => {
-    browser.close();
+afterEach(async () => {
+    await page.close();
 });
 
 test('Adds two numbers', () => {
