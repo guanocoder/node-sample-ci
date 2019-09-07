@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  testhost:
+    build:
+      dockerfile: testHost.Dockerfile
+      context: .
+    environment:
+      - NODE_ENV=local_docker
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      dockerfile: frontEnd.Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=local_docker
+    depends_on:
+      - redis
+
+  redis:
+    image: redis

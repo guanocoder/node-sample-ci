@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const userFactory = require('../factories/userFactory');
 const sessionFactory = require('../factories/sessionFactory');
+const keys = require('../../config/keys');
 
 class CustomPage {
 
@@ -10,7 +11,7 @@ class CustomPage {
     }
 
     static async build() {
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch(keys.tests.puppeteerOptions);
         const page = await browser.newPage();
         const customPage = new CustomPage(page, browser);
 
@@ -27,7 +28,7 @@ class CustomPage {
     
         await this.page.setCookie( { name: "session", value: session });
         await this.page.setCookie( { name: "session.sig", value: sig });
-        await this.page.goto('localhost:3000/blogs');
+        await this.page.goto(`${keys.tests.targetHost}/blogs`);
         await this.page.waitFor('a[href="/auth/logout"]');
     
     }
