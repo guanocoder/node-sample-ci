@@ -36,6 +36,27 @@ class CustomPage {
     async close() {
         return this.browser.close();
     }
+
+    post(url, body) {
+        return this.makeRequestThroughInBrowserJSEvaluation(url, 'POST', body);
+    }
+
+    get(url) {
+        return this.makeRequestThroughInBrowserJSEvaluation(url, 'GET');
+    }
+
+    makeRequestThroughInBrowserJSEvaluation(url, method, body) {
+        return this.page.evaluate((_url, _method, _body) => {
+            return fetch(_url , {
+                method: _method,
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: (_body) ? JSON.stringify(_body) : undefined
+            }).then(response => response.json());
+        }, url, method, body);
+    }
 }
 
 module.exports = CustomPage;
