@@ -7,8 +7,9 @@ module.exports = {
   redisHost: "127.0.0.1:6379",
   tests: {
     puppeteerOptions: {
-      headless: false
+      headless: true,
+      //args: ["--no-sandbox"]
     },
-    targetHost: "localhost:3000"
+    targetHost: "http://localhost:3000"
   }
 };

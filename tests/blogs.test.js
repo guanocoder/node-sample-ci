@@ -1,10 +1,11 @@
 const Page = require('./helpers/customPage');
+const keys = require('../config/keys');
 
 let page;
 
 beforeEach(async () => {
     page = await Page.build();
-    await page.goto('localhost:3000');
+    await page.goto(keys.tests.targetHost);
 });
 
 afterEach(async () => {
@@ -12,7 +13,7 @@ afterEach(async () => {
 });
 
 
-describe('When logged in', async () => {
+describe('When logged in', () => {
     beforeEach(async () => {
         await page.login();
         await page.click('a.btn-floating.btn-large.red');
@@ -38,7 +39,7 @@ describe('When logged in', async () => {
     });
 
 
-    describe('And using valid inputs', async() => {
+    describe('And using valid inputs', () => {
 
         let myTitleInput = "My Blog's Title";
         let myContentInput = "My Blog's Content";
@@ -75,7 +76,7 @@ describe('When logged in', async () => {
 });
 
 
-describe('User is not logged in', async () => {
+describe('User is not logged in', () => {
 
     test('User cannot create blog posts', async () => {
 

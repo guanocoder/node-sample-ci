@@ -1,10 +1,11 @@
 const Page = require('./helpers/customPage');
+const keys = require('../config/keys');
 
 let page;
 
 beforeEach(async () => {
     page = await Page.build();
-    await page.goto('localhost:3000');
+    await page.goto(keys.tests.targetHost);
 });
 
 afterEach(async () => {

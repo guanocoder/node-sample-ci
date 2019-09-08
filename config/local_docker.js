@@ -10,6 +10,6 @@ module.exports = {
         headless: true,
         args: ['--no-sandbox']
       },
-      targetHost: "frontend:3000"
+      targetHost: "http://frontend:3000"
     }
   };
