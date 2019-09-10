@@ -3,7 +3,7 @@ FROM node:alpine
 WORKDIR /app
 COPY . .
 RUN npm install --production
+RUN npm run build
 
-EXPOSE 3000 5000
-
-CMD ["npm", "run", "dev"]
+EXPOSE 5000
+CMD ["npm", "run", "start"]

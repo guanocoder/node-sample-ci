@@ -8,8 +8,8 @@ module.exports = {
     tests: {
       puppeteerOptions: {
         headless: true,
-        args: ['--no-sandbox']
+        args: ['--no-sandbox'] // In a docker container: "Running as root without --no-sandbox is not supported."
       },
-      targetHost: "http://frontend:3000"
+      targetHost: "http://frontend:5000"
     }
   };
